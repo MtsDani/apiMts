@@ -46,7 +46,27 @@ app.get("/produtos", function(req, res) {
   });
 });
 
-////////////////////////******** */insersão
+app.get("/Ordens", function(req, res) {
+
+  let filtro = [];
+  let ssql = "SELECT CDFIL, NUCONS, DTEMISSAO, DTFECHA, CDCLIFOR, IDSIT FROM  VNDPEDOS WHERE NUCONS <> ''";
+
+  if (req.query.descricao) {
+    ssql += "AND CDCLIFOR LIKE?"
+    filtro.push("%" + req.query.descricao + "%");
+  }
+//Retirada dos comentarios dos testes de api
+  executeQuery(ssql, filtro, function(err, result) {
+     if (err) {
+      res.status(500).json(err);
+     } else {
+      res.status(200).json(result);
+     }
+  });
+});
+
+
+
 app.post("/clientes", function(req, res) {
 
   let ssql = 'INSERT INTO CADCLIFOR(CDCLIFOR, IDCLI, IDFOR, IDTRAN, NMCLIFOR, IDMAIL) VALUES(?,?,?,?,?,?) ';
