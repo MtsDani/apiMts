@@ -36,7 +36,7 @@ app.get("/produtos", function(req, res) {
     ssql += "AND DEPRO LIKE?"
     filtro.push("%" + req.query.descricao + "%");
   }
-//segundo comit dos fontes para casa dani testes
+//Retirada dos comentarios dos testes de api
   executeQuery(ssql, filtro, function(err, result) {
      if (err) {
       res.status(500).json(err);
